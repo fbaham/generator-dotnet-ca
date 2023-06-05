@@ -8,18 +8,16 @@ module.exports = class extends Generator {
     // Have Yeoman greet the user.
     this.log(
       yosay(
-        `Welcome to the mind-blowing ${chalk.red(
-          "generator-express-mongodb"
-        )} generator!`
+        `Gracias por usar ${chalk.red('generator-dotnet-ca')} generator!`
       )
     );
 
     const prompts = [
       {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
+        type: "input",
+        name: "name",
+        message: "Entity Name",
+        default: "SamiTheBastard"
       }
     ];
 
@@ -32,7 +30,7 @@ module.exports = class extends Generator {
   writing() {
     this.fs.copy(
       this.templatePath('dummyfile.txt'),
-      this.destinationPath('src/dummyfile.txt')
+      this.destinationPath('dummyfile.txt')
     );
   }
 

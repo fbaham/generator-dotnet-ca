@@ -1,4 +1,4 @@
-namespace <%= project %>.Application.Admin.<%= plural %>.Queries.Export<%= plural %>;
+namespace <%= project %>.Application.Admin.<%= plural %>.Queries.Export;
 public class Export<%= pascal %>ListVm
 {
     public Export<%= pascal %>ListVm(string fileName, string contentType, byte[] content)

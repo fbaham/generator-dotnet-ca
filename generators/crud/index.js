@@ -215,7 +215,7 @@ module.exports = class extends Generator {
       {
         src: this.templatePath("src/WebUI/Controllers/EntityController.cs.js"),
         out: this.destinationPath(
-          `src/WebUI/Controllers/${this.props.pascal}Controller.cs`
+          `src/WebUI/Controllers/Admin/${this.props.pascal}Controller.cs`
         )
       }
     ];

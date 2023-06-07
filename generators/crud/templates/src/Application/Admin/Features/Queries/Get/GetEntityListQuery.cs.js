@@ -1,5 +1,5 @@
 namespace <%= project %>.Application.Admin.<%= plural %>.Queries.Get;
-[Authorize(Policy = Permissions.READ)]
+[Authorize(Policy = Permissions.<%= read %>)]
 public record Get<%= pascal %>ListQuery : IRequest<Get<%= pascal %>ListDto>
 {
     public int Id { get; set; }

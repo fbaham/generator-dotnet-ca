@@ -1,5 +1,5 @@
 namespace <%= project %>.Application.Admin.<%= plural %>.Commands.Load;
-[Authorize(Policy = Permissions.WRITE)]
+[Authorize(Policy = Permissions.<%= write %>)]
 public record Load<%= pascal %>ListCommand : IRequest<int>
 {
     public string? base64 { get; set; }

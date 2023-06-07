@@ -1,5 +1,5 @@
 namespace <%= project %>.Application.Admin.<%= plural %>.Commands.Delete;
-[Authorize(Policy = Permissions.WRITE)]
+[Authorize(Policy = Permissions.<%= write %>)]
 public record Delete<%= pascal %>Command : IRequest<Unit>
 {
     public int Id { get; set; }

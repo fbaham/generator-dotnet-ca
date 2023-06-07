@@ -1,5 +1,5 @@
 namespace <%= project %>.Application.Admin.<%= plural %>.Queries.Export;
-[Authorize(Policy = Permissions.READ)]
+[Authorize(Policy = Permissions.<%= read %>)]
 public record Export<%= pascal %>ListQuery : IRequest<Export<%= pascal %>ListVm>
 {
 }

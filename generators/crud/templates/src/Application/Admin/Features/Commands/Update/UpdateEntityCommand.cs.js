@@ -1,5 +1,5 @@
 namespace Prometheus.Application.Admin.<%= plural %>.Commands.Update;
-[Authorize(Policy = Permissions.WRITE)]
+[Authorize(Policy = Permissions.<%= write %>)]
 public record Update<%= pascal %>Command : IRequest<Unit>
 {
     /* YOUR CODE */

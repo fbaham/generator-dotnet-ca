@@ -1,5 +1,5 @@
 namespace <%= project %>.Application.Admin.<%= plural %>.Commands.Create;
-[Authorize(Policy = Permissions.WRITE)] 
+[Authorize(Policy = Permissions.<%= write %>)] 
 public record Create<%= pascal %>Command : IRequest<int>
 {
     /* YOUR CODE */
@@ -14,7 +14,6 @@ public class Create<%= pascal %>CommandHandler : IRequestHandler<Create<%= pasca
     }
     public async Task<int> Handle(Create<%= pascal %>Command request, CancellationToken cancellationToken)
     {
-        var rutObj = Rut.Parse(request.Rut);
         var obj = new Create<%= pascal %>Dto()
         {
             /* YOUR CODE */

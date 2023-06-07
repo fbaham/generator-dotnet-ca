@@ -21,7 +21,4 @@ public class <%= plural %>Controller : ApiControllerBase
     [HttpGet("ExportAsync")]
     public async Task<ActionResult<Export<%= pascal %>ListVm>> ExportAsync([FromQuery] Export<%= pascal %>ListQuery query)
         => await Mediator.Send(query);
-    [HttpGet("FindAsync")]
-    public async Task<ActionResult<Get<%= pascal %>ListDto>> FindAsync([FromQuery] Find<%= pascal %>ByParameterQuery query)
-        => await Mediator.Send(query);
 }

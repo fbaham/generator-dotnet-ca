@@ -2,7 +2,7 @@
 const Generator = require("yeoman-generator");
 const chalk = require("chalk");
 const yosay = require("yosay");
-
+const _ = require("lodash");
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
@@ -19,18 +19,6 @@ module.exports = class extends Generator {
       },
       {
         type: "input",
-        name: "pascal",
-        message: "Entity Name in PascalCase",
-        default: "ShawarmaDeCarne"
-      },
-      {
-        type: "input",
-        name: "camel",
-        message: "Entity Name in camelCase",
-        default: "shawarmaDeCarne"
-      },
-      {
-        type: "input",
         name: "kebab",
         message: "Entity Name in kebab-case",
         default: "shawarma-de-carne"
@@ -38,8 +26,8 @@ module.exports = class extends Generator {
       {
         type: "input",
         name: "plural",
-        message: "Entity Name in plural",
-        default: "ShawarmasDeCarne"
+        message: "Plural Entity Name in kebab-case",
+        default: "shawarmas-de-carne"
       }
     ];
 
@@ -50,13 +38,18 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    const cases = {
+      camel: _.camelCase(this.props.kebab),
+      pascal: _.upperFirst(_.camelCase(this.props.kebab)),
+      plural: _.upperFirst(_.camelCase(this.props.plural))
+    };
     const files = [
       {
         src: this.templatePath(
           "src/Domain/Events/Admin/EntityCreatedEvent.cs.js"
         ),
         out: this.destinationPath(
-          `src/Domain/Events/Admin/${this.props.pascal}CreatedEvent.cs`
+          `src/Domain/Events/Admin/${cases.pascal}CreatedEvent.cs`
         )
       },
       {
@@ -64,7 +57,7 @@ module.exports = class extends Generator {
           "src/Domain/Events/Admin/EntityDeletedEvent.cs.js"
         ),
         out: this.destinationPath(
-          `src/Domain/Events/Admin/${this.props.pascal}DeletedEvent.cs`
+          `src/Domain/Events/Admin/${cases.pascal}DeletedEvent.cs`
         )
       },
       {
@@ -72,7 +65,7 @@ module.exports = class extends Generator {
           "src/Domain/Events/Admin/EntityUpdatedEvent.cs.js"
         ),
         out: this.destinationPath(
-          `src/Domain/Events/Admin/${this.props.pascal}UpdatedEvent.cs`
+          `src/Domain/Events/Admin/${cases.pascal}UpdatedEvent.cs`
         )
       },
       {
@@ -80,7 +73,7 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/Commands/Create/CreateEntityCommand.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/Commands/Create/Create${this.props.pascal}Command.cs`
+          `src/Application/Admin/${cases.plural}/Commands/Create/Create${cases.pascal}Command.cs`
         )
       },
       {
@@ -88,7 +81,7 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/Commands/Delete/DeleteEntityCommand.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/Commands/Delete/Delete${this.props.pascal}Command.cs`
+          `src/Application/Admin/${cases.plural}/Commands/Delete/Delete${cases.pascal}Command.cs`
         )
       },
       {
@@ -96,7 +89,7 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/Commands/Load/LoadEntityCommand.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/Commands/Load/Load${this.props.pascal}Command.cs`
+          `src/Application/Admin/${cases.plural}/Commands/Load/Load${cases.pascal}Command.cs`
         )
       },
       {
@@ -104,7 +97,7 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/Commands/Update/UpdateEntityCommand.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/Commands/Update/Update${this.props.pascal}Command.cs`
+          `src/Application/Admin/${cases.plural}/Commands/Update/Update${cases.pascal}Command.cs`
         )
       },
       {
@@ -112,7 +105,7 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/DTOs/CreateEntityDto.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/DTOs/Create${this.props.pascal}Dto.cs`
+          `src/Application/Admin/${cases.plural}/DTOs/Create${cases.pascal}Dto.cs`
         )
       },
       {
@@ -120,7 +113,7 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/DTOs/EntityDto.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/DTOs/${this.props.pascal}Dto.cs`
+          `src/Application/Admin/${cases.plural}/DTOs/${cases.pascal}Dto.cs`
         )
       },
       {
@@ -128,7 +121,7 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/DTOs/GetEntityListDto.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/DTOs/Get${this.props.pascal}ListDto.cs`
+          `src/Application/Admin/${cases.plural}/DTOs/Get${cases.pascal}ListDto.cs`
         )
       },
       {
@@ -136,7 +129,7 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/EventHandlers/EntityCreatedEventHandler.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/EventHandlers/${this.props.pascal}CreatedEventHandler.cs`
+          `src/Application/Admin/${cases.plural}/EventHandlers/${cases.pascal}CreatedEventHandler.cs`
         )
       },
       {
@@ -144,7 +137,7 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/EventHandlers/EntityDeletedEventHandler.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/EventHandlers/${this.props.pascal}DeletedEventHandler.cs`
+          `src/Application/Admin/${cases.plural}/EventHandlers/${cases.pascal}DeletedEventHandler.cs`
         )
       },
       {
@@ -152,7 +145,7 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/EventHandlers/EntityUpdatedEventHandler.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/EventHandlers/${this.props.pascal}UpdatedEventHandler.cs`
+          `src/Application/Admin/${cases.plural}/EventHandlers/${cases.pascal}UpdatedEventHandler.cs`
         )
       },
       {
@@ -160,7 +153,7 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/Queries/Export/EntityFileRecord.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/Queries/Export/${this.props.pascal}FileRecord.cs`
+          `src/Application/Admin/${cases.plural}/Queries/Export/${cases.pascal}FileRecord.cs`
         )
       },
       {
@@ -168,7 +161,7 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/Queries/Export/ExportEntityListQuery.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/Queries/Export/Export${this.props.pascal}ListQuery.cs`
+          `src/Application/Admin/${cases.plural}/Queries/Export/Export${cases.pascal}ListQuery.cs`
         )
       },
       {
@@ -176,7 +169,7 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/Queries/Export/ExportEntityListVm.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/Queries/Export/Export${this.props.pascal}ListVm.cs`
+          `src/Application/Admin/${cases.plural}/Queries/Export/Export${cases.pascal}ListVm.cs`
         )
       },
       {
@@ -184,13 +177,13 @@ module.exports = class extends Generator {
           "src/Application/Admin/Features/Queries/Get/GetEntityListQuery.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.plural}/Queries/Get/Get${this.props.pascal}ListQuery.cs`
+          `src/Application/Admin/${cases.plural}/Queries/Get/Get${cases.pascal}ListQuery.cs`
         )
       },
       {
         src: this.templatePath("src/Application/Admin/EntityService.cs.js"),
         out: this.destinationPath(
-          `src/Application/Admin/${this.props.pascal}Service.cs`
+          `src/Application/Admin/${cases.pascal}Service.cs`
         )
       },
       {
@@ -198,7 +191,7 @@ module.exports = class extends Generator {
           "src/Application/Common/Interfaces/IEntityService.cs.js"
         ),
         out: this.destinationPath(
-          `src/Application/Common/Interfaces/I${this.props.pascal}Service.cs`
+          `src/Application/Common/Interfaces/I${cases.pascal}Service.cs`
         )
       },
       {
@@ -206,7 +199,7 @@ module.exports = class extends Generator {
           "src/Infrastructure/Files/Maps/EntityRecordMap.cs.js"
         ),
         out: this.destinationPath(
-          `src/Infrastructure/Files/Maps/${this.props.pascal}RecordMap.cs`
+          `src/Infrastructure/Files/Maps/${cases.pascal}RecordMap.cs`
         )
       },
       // { src: this.templatePath('src/WebUI/ClientApp/src/app/admin/entity/entity.component.css.js'), out: this.destinationPath(`src/WebUI/ClientApp/src/app/admin/${this.props.kebab}/${this.props.kebab}.component.css`), },
@@ -215,17 +208,19 @@ module.exports = class extends Generator {
       {
         src: this.templatePath("src/WebUI/Controllers/EntityController.cs.js"),
         out: this.destinationPath(
-          `src/WebUI/Controllers/Admin/${this.props.pascal}Controller.cs`
+          `src/WebUI/Controllers/Admin/${cases.pascal}Controller.cs`
         )
       }
     ];
 
     const cont = {
       project: this.props.project,
-      pascal: this.props.pascal,
-      camel: this.props.camel,
+      pascal: cases.pascal,
+      camel: cases.camel,
       kebab: this.props.kebab,
-      plural: this.props.plural
+      plural: cases.plural,
+      read: this.props.kebab.replace("-", "_").toUpperCase() + "_READ",
+      write: this.props.kebab.replace("-", "_").toUpperCase() + "_WRITE"
     };
 
     const copyOpts = {

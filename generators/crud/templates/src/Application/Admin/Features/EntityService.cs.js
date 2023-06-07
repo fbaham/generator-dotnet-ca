@@ -78,38 +78,4 @@ public class <%= pascal %>Service : I<%= pascal %>Service
         await _context.SaveChangesAsync(cancellationToken);
         return Unit.Value;
     }
-
-    public async Task<int> LoadAsync(string? base64, CancellationToken cancellationToken)
-    {
-        var buffer = Convert.FromBase64String(base64); ;
-        int c = 0;
-        using (var reader = new StreamReader(new MemoryStream(buffer)))
-        {
-            while (!reader.EndOfStream)
-            {
-                var line = reader.ReadLine();
-                var values = line.Split(';');
-                var entity = new <%= pascal %>()
-                {
-                    /* your code */
-                };
-                entity.AddDomainEvent(new <%= pascal %>CreatedEvent(entity));
-                await _context.<%= plural %>.AddAsync(entity, cancellationToken);
-                await _context.SaveChangesAsync(cancellationToken);
-                c++;
-            }
-        }
-        return c;
-    }
-    public async Task<Export<%= pascal %>ListVm> ExportAsync(CancellationToken cancellationToken)
-    {
-        var records = await _context.<%= plural %>
-            .ProjectTo<<%= pascal %>FileRecord>(_mapper.ConfigurationProvider)
-            .ToListAsync();
-        var vm = new Export<%= pascal %>ListVm(
-            "<%= pascal %>List.csv",
-            "text/csv",
-            _fileBuilder.Build<%= pascal %>File(records));
-        return vm;
-    }
 }

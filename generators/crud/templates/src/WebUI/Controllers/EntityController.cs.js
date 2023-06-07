@@ -15,10 +15,4 @@ public class <%= plural %>Controller : ApiControllerBase
     [HttpDelete("DeleteAsync")]
     public async Task<ActionResult<Unit>> DeleteAsync(Delete<%= pascal %>Command command)
         => await Mediator.Send(command);
-    [HttpPost("LoadAsync")]
-    public async Task<ActionResult<int>> LoadAsync(Load<%= pascal %>ListCommand command)
-        => await Mediator.Send(command);
-    [HttpGet("ExportAsync")]
-    public async Task<ActionResult<Export<%= pascal %>ListVm>> ExportAsync([FromQuery] Export<%= pascal %>ListQuery query)
-        => await Mediator.Send(query);
 }

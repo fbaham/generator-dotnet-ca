@@ -86,14 +86,6 @@ module.exports = class extends Generator {
       },
       {
         src: this.templatePath(
-          "src/Application/Admin/Features/Commands/Load/LoadEntityCommand.cs.js"
-        ),
-        out: this.destinationPath(
-          `src/Application/Admin/${cases.plural}/Commands/Load/Load${cases.pascal}Command.cs`
-        )
-      },
-      {
-        src: this.templatePath(
           "src/Application/Admin/Features/Commands/Update/UpdateEntityCommand.cs.js"
         ),
         out: this.destinationPath(
@@ -150,30 +142,6 @@ module.exports = class extends Generator {
       },
       {
         src: this.templatePath(
-          "src/Application/Admin/Features/Queries/Export/EntityFileRecord.cs.js"
-        ),
-        out: this.destinationPath(
-          `src/Application/Admin/${cases.plural}/Queries/Export/${cases.pascal}FileRecord.cs`
-        )
-      },
-      {
-        src: this.templatePath(
-          "src/Application/Admin/Features/Queries/Export/ExportEntityListQuery.cs.js"
-        ),
-        out: this.destinationPath(
-          `src/Application/Admin/${cases.plural}/Queries/Export/Export${cases.pascal}ListQuery.cs`
-        )
-      },
-      {
-        src: this.templatePath(
-          "src/Application/Admin/Features/Queries/Export/ExportEntityListVm.cs.js"
-        ),
-        out: this.destinationPath(
-          `src/Application/Admin/${cases.plural}/Queries/Export/Export${cases.pascal}ListVm.cs`
-        )
-      },
-      {
-        src: this.templatePath(
           "src/Application/Admin/Features/Queries/Get/GetEntityListQuery.cs.js"
         ),
         out: this.destinationPath(
@@ -183,7 +151,7 @@ module.exports = class extends Generator {
       {
         src: this.templatePath("src/Application/Admin/EntityService.cs.js"),
         out: this.destinationPath(
-          `src/Application/Admin/${cases.pascal}Service.cs`
+          `src/Application/Admin/${cases.plural}/${cases.pascal}Service.cs`
         )
       },
       {
@@ -194,17 +162,6 @@ module.exports = class extends Generator {
           `src/Application/Common/Interfaces/I${cases.pascal}Service.cs`
         )
       },
-      {
-        src: this.templatePath(
-          "src/Infrastructure/Files/Maps/EntityRecordMap.cs.js"
-        ),
-        out: this.destinationPath(
-          `src/Infrastructure/Files/Maps/${cases.pascal}RecordMap.cs`
-        )
-      },
-      // { src: this.templatePath('src/WebUI/ClientApp/src/app/admin/entity/entity.component.css.js'), out: this.destinationPath(`src/WebUI/ClientApp/src/app/admin/${this.props.kebab}/${this.props.kebab}.component.css`), },
-      // { src: this.templatePath('src/WebUI/ClientApp/src/app/admin/entity/entity.component.html.js'), out: this.destinationPath(`src/WebUI/ClientApp/src/app/admin/${this.props.kebab}/${this.props.kebab}.component.html`), },
-      // { src: this.templatePath('src/WebUI/ClientApp/src/app/admin/entity/entity.component.ts.js'), out: this.destinationPath(`src/WebUI/ClientApp/src/app/admin/${this.props.kebab}/${this.props.kebab}.component.ts`), },
       {
         src: this.templatePath("src/WebUI/Controllers/EntityController.cs.js"),
         out: this.destinationPath(
@@ -235,6 +192,7 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.installDependencies();
+    // This.installDependencies();
+    // this.spawnCommandSync("dotnet", ["tool", "restore"]);
   }
 };

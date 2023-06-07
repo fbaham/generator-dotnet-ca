@@ -11,21 +11,6 @@ public class <%= pascal %>Service : I<%= pascal %>Service
         _fileBuilder = fileBuilder;
     }
 
-    public async Task<Unit> Delete<%= pascal %>(int id, CancellationToken cancellationToken)
-    {
-        var entity = await _context.<%= plural %>
-            .Where(o => o.Id == id)
-            .SingleOrDefaultAsync();
-        if (entity == null)
-        {
-            throw new NotFoundException(nameof(<%= pascal %>), id);
-        }
-        entity.AddDomainEvent(new <%= pascal %>DeletedEvent(entity));
-        _context.<%= plural %>.Remove(entity);
-        await _context.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
-    }
-
     public async Task<int> CreateAsync(Create<%= pascal %>Dto obj, CancellationToken cancellationToken)
     {
         var entity = new <%= pascal %>

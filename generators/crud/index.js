@@ -149,7 +149,9 @@ module.exports = class extends Generator {
         )
       },
       {
-        src: this.templatePath("src/Application/Admin/EntityService.cs.js"),
+        src: this.templatePath(
+          "src/Application/Admin/Features/EntityService.cs.js"
+        ),
         out: this.destinationPath(
           `src/Application/Admin/${cases.plural}/${cases.pascal}Service.cs`
         )

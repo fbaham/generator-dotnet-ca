@@ -1,3 +1,12 @@
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using <%= project %>.Application.Admin.<%= plural %>.DTOs;
+using <%= project %>.Application.Admin.<%= plural %>.Commands.Create;
+using <%= project %>.Application.Admin.<%= plural %>.Commands.Delete;
+using <%= project %>.Application.Admin.<%= plural %>.Commands.Update;
+using <%= project %>.Application.Admin.<%= plural %>.Queries.Get;
+using <%= project %>.WebUI.Controllers;
+
 namespace WebUI.Controllers;
 [Route("api/[controller]")]
 [ApiController]

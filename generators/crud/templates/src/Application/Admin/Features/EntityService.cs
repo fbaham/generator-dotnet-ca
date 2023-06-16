@@ -1,3 +1,5 @@
+using <%= project %>.Application.Admin.<%= plural %>.DTOs;
+
 namespace <%= project %>.Application.Admin.<%= plural %>;
 public class <%= pascal %>Service : I<%= pascal %>Service
 {
@@ -35,7 +37,7 @@ public class <%= pascal %>Service : I<%= pascal %>Service
         };
     }
 
-    public async Task<Unit> UpdateAsync(<%= pascal %>Dto obj, CancellationToken cancellationToken)
+    public async Task<Unit> UpdateAsync(Update<%= pascal %>Dto obj, CancellationToken cancellationToken)
     {
         var entity = await _context.<%= plural %>
             .FindAsync(new object[] { obj.Id }, cancellationToken);

@@ -1,3 +1,5 @@
+using <%= project %>.Application.Admin.<%= plural %>.DTOs;
+
 namespace <%= project %>.Application.Admin.<%= plural %>.Queries.Get;
 [Authorize(Policy = Permissions.<%= read %>)]
 public record Get<%= pascal %>ListQuery : IRequest<Get<%= pascal %>ListDto>
